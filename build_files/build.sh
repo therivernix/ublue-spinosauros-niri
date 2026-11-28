@@ -16,7 +16,7 @@ cp -avf /ctx/system_files/. /
 install -d /etc/niri
 niri_config=/etc/niri/config.kdl
 cp /usr/share/doc/niri/default-config.kdl "$niri_config"
-niri --config "$niri_config" validate
+niri validate --config "$niri_config"
 
 systemctl --global enable noctalia-niri.service
 systemctl enable greetd.service

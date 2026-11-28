@@ -1,0 +1,10 @@
+[Unit]
+Description=Noctalia shell for Niri
+After=niri.service
+PartOf=niri.service
+
+[Service]
+ExecStart=/usr/bin/noctalia
+
+[Install]
+WantedBy=niri.service
