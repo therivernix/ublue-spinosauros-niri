@@ -7,7 +7,7 @@ dnf5 -y --setopt=install_weak_deps=False install \
     niri noctalia greetd greetd-selinux \
     alacritty \
     pipewire pipewire-pulseaudio wireplumber \
-    xdg-desktop-portal xdg-desktop-portal-gtk tmux
+    xdg-desktop-portal xdg-desktop-portal-gtk flatpak tmux
 
 # Use Terra for this install transaction and verify RPM signatures.
 # Expand the release here because DNF leaves it literal in the key override.
@@ -44,6 +44,8 @@ cp /usr/share/doc/niri/default-config.kdl "$niri_config"
 niri validate --config "$niri_config"
 
 systemctl --global enable noctalia-niri.service
+systemctl --global enable remove-gnome-flatpaks.service
+systemctl enable remove-gnome-flatpaks.service
 systemctl enable greetd.service
 systemctl set-default graphical.target
 

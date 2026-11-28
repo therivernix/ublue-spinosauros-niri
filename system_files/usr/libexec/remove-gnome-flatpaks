@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+
+set -euo pipefail
+
+scope=$1
+marker="$STATE_DIRECTORY/done"
+[[ ! -e "$marker" ]] || exit 0
+
+installed_refs=$(/usr/bin/flatpak list "$scope" --app --columns=ref)
+gnome_refs=()
+while IFS= read -r ref; do
+    [[ "$ref" == org.gnome.* ]] || continue
+    gnome_refs+=("app/$ref")
+done <<< "$installed_refs"
+
+if (( ${#gnome_refs[@]} )); then
+    /usr/bin/flatpak uninstall "$scope" --noninteractive "${gnome_refs[@]}"
+fi
+
+touch "$marker"

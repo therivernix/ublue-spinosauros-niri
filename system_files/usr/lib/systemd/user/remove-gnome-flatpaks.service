@@ -1,0 +1,11 @@
+[Unit]
+Description=Remove per-user GNOME Flatpak apps on first Niri login
+After=niri.service
+
+[Service]
+Type=oneshot
+StateDirectory=remove-gnome-flatpaks
+ExecStart=/usr/libexec/remove-gnome-flatpaks --user
+
+[Install]
+WantedBy=niri.service

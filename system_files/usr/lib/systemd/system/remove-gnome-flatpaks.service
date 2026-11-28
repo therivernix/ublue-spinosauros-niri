@@ -1,0 +1,12 @@
+[Unit]
+Description=Remove system-wide GNOME Flatpak apps once
+Before=greetd.service
+ConditionPathExists=!/var/lib/remove-gnome-flatpaks/done
+
+[Service]
+Type=oneshot
+StateDirectory=remove-gnome-flatpaks
+ExecStart=/usr/libexec/remove-gnome-flatpaks --system
+
+[Install]
+WantedBy=greetd.service
