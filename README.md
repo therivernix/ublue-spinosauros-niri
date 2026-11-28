@@ -1,6 +1,10 @@
-# image-template
+# Spinosauros Niri
 
-This repository is meant to be a template for building your own custom [bootc](https://github.com/bootc-dev/bootc) image. This template is the recommended way to make customizations to any image published by the Universal Blue Project.
+This repository builds a Fedora 44 bootc image with Niri and the Noctalia shell. It uses Universal Blue's `base-main` to keep the GNOME desktop and GDM out of the image. At boot, greetd displays Tuigreet on VT1 and launches `niri-session` after login. Noctalia starts with Niri and provides the bar, launcher, notifications, and screen lock.
+
+Run `just build` to build the image. Super+T opens Alacritty, Super+D opens the Noctalia launcher, Super+Alt+L locks the session, and Super+Shift+/ shows the configured shortcuts. The image defaults live in `/etc/niri/config.kdl`. If you already have a personal Niri config, merge the Noctalia startup line and shortcuts into it.
+
+The image uses the GTK portal for file pickers. Portal-based screen sharing is unavailable with this configuration.
 
 # Community
 
