@@ -1,6 +1,6 @@
 # Spinosauros Niri
 
-This repository builds a Fedora 44 bootc image with Niri and the Noctalia shell. It uses Universal Blue's `base-main` to keep the GNOME desktop and GDM out of the image. At boot, greetd displays Tuigreet on VT1 and launches `niri-session` after login. Noctalia starts with Niri and provides the bar, launcher, notifications, and screen lock.
+This repository builds a Fedora 44 bootc image with Niri and the Noctalia shell. It uses Universal Blue's `base-main` to keep the GNOME desktop and GDM out of the image. At boot, greetd displays Noctalia Greeter on VT1. Select Niri on the sign-in screen to start the desktop session. The build installs the greeter from Terra. Noctalia Shell starts with Niri and provides the bar, launcher, notifications, and screen lock.
 
 Run `just build` to build the image. The image copies Fedora's stock Niri config to `/etc/niri/config.kdl` and starts Noctalia through a systemd user service. Super+T opens Alacritty. Use Noctalia's bar for the launcher and screen lock. The stock config still references Waybar, Fuzzel, and swaylock, which are absent from the image.
 
