@@ -12,20 +12,13 @@ dnf5 -y --setopt=install_weak_deps=False install \
 # Apply image defaults after the packages have installed their configuration.
 cp -avf /ctx/system_files/. /
 
-# Keep Fedora's Niri bindings and use Noctalia for the bar, launcher, and lock.
+# Use Fedora's packaged Niri configuration as the system default.
 install -d /etc/niri
 niri_config=/etc/niri/config.kdl
-sed \
-    -e 's/^spawn-at-startup "waybar"$/spawn-at-startup "noctalia"/' \
-    -e 's/"Run an Application: fuzzel" { spawn "fuzzel"; }/"Open Noctalia Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }/' \
-    -e 's/"Lock the Screen: swaylock" { spawn "swaylock"; }/"Lock the Screen" { spawn "noctalia" "msg" "session" "lock"; }/' \
-    /usr/share/doc/niri/default-config.kdl > "$niri_config"
-
-grep -Fx 'spawn-at-startup "noctalia"' "$niri_config"
-grep -F 'spawn "noctalia" "msg" "panel-toggle" "launcher"' "$niri_config"
-grep -F 'spawn "noctalia" "msg" "session" "lock"' "$niri_config"
+cp /usr/share/doc/niri/default-config.kdl "$niri_config"
 niri --config "$niri_config" validate
 
+systemctl --global enable noctalia-niri.service
 systemctl enable greetd.service
 systemctl set-default graphical.target
 
