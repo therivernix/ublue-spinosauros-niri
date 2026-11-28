@@ -6,6 +6,8 @@ Run `just build` to build the image. The image copies Fedora's stock Niri config
 
 The image uses the GTK portal for file pickers. Portal-based screen sharing is unavailable with this configuration.
 
+The image excludes inherited GNOME Flatpak preinstall entries. If you switched from Silverblue, system Flatpaks already installed in `/var` can carry over. Run `flatpak list --system --app --columns=application,origin` to review them, then use `sudo flatpak uninstall --system APP_ID` for the Silverblue defaults you want to remove.
+
 # Community
 
 If you have questions about this template after following the instructions, try the following spaces:
